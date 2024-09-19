@@ -57,15 +57,17 @@ strictGraceOff = {
   \newSpacingSection
 }
 
-%%% Positions 
+%%% Positions and Shapes
 
 slurShapeA = \shape #'((0 . -3) (0 . -5) (0 . -5) (0 . -3)) \etc
 slurShapeB = \shape #'((0 . 0) (0 . -0.5) (0 . -0.5) (0 . 0)) \etc
 slurShapeC = \shape #'((0 . 0) (0 . -0.5) (0 . -0.5) (0 . 0)) \etc
 
+moveClefA = \once \override Staff.Clef.extra-offset = #'(0.25 . 0)
+
 %%% Markup
 
-dimMarkup = \markup \italic "dim."
+dimMarkup = \markup \large \italic "dim."
 riten = \markup \large \italic "riten."
 aTempo = \markup \large \italic "a tempo"
 crescSempre = \makeSpanner \markup \large \italic "sempre cresc."
@@ -324,7 +326,7 @@ leftHand = \relative {
     cs8[( gs' cs e cs gs)]  e[( gs cs e cs gs)] |
     fs8[( cs' ds a' ds, cs])  \clef treble gs[( cs es b' es, cs]) |
     a8[( cs fs a fs cs])  gs[( cs es b' es, cs]) |
-    a8[( cs fs a fs cs])  \clef bass bs,[( fs' gs ds' gs, fs]) |
+    a8[( cs fs a fs cs])  \moveClefA \clef bass bs,[( fs' gs ds' gs, fs]) |
     
     \barNumberCheck 33
     cs8[( gs' cs e cs gs])  ds[( gs bs fs' bs, gs]) |
@@ -449,7 +451,7 @@ leftHand = \relative {
     cs8[( gs' cs e cs gs)]  e[( gs cs e cs gs)] |
     fs8[( cs' ds a' ds, cs])  \clef treble gs[( cs es b' es, cs)] |
     a8[( cs fs a fs cs])  gs[( cs es b' es, cs]) |
-    a8[( cs fs a fs cs])  \clef bass bs,[( fs' gs ds' gs, fs]) |
+    a8[( cs fs a fs cs])  \moveClefA \clef bass bs,[( fs' gs ds' gs, fs]) |
     cs8[( gs' cs e cs gs])  ds[( gs bs fs' bs, gs]) |
     e8[( gs cs e cs gs])  fs[( cs' ds a' ds, cs]) |
   }
@@ -533,7 +535,9 @@ dynamics = {
   
   \barNumberCheck 41
   % key of df major
-  \tuplet 3/2 { s4.\< s4 s8\! s4.\> s4 s8\! | }
+  \tuplet 3/2 { 
+    \tag layout { s4.\< } \tag midi { s4.\p\< } s4 s8\! s4.\> s4 s8\! | 
+  }
   s1 |
   s2^\sotoVoce s4..\< s16\! |
   s4..\< s16\! s2 |
